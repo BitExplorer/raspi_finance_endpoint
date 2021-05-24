@@ -1,1 +1,3 @@
 rootProject.name = 'raspi-finance-endpoint'
+
+include ':finance-endpoint'

@@ -1,22 +1,6 @@
 buildscript {
 }
 
-plugins {
-    id 'java'
-    id 'groovy'
-    id 'idea'
-    id 'scala'
-    // id 'maven'
-    id 'java-library'
-    id 'jacoco'
-    id 'codenarc'
-    id "org.springframework.boot" version "${springBootVersion}"
-    id "org.jetbrains.kotlin.jvm" version "${kotlinVersion}"
-    id "org.flywaydb.flyway" version "${flywayVersion}"
-    id "com.github.ben-manes.versions" version "${gradleVersionsPlugin}"
-}
-
-apply from: 'test.gradle'
 
 repositories {
     jcenter()
@@ -36,115 +20,6 @@ repositories {
 
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-codenarc {
-    toolVersion = "$codenarcPluginVersion"
-}
-
-compileKotlin {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-    kotlinOptions.jvmTarget = JavaVersion.VERSION_11
-}
-
-sourceSets {
-    main.kotlin.srcDirs += "src/main/kotlin"
-}
-
-compileJava {
-    options.annotationProcessorPath = configurations.annotationProcessor
-}
-
-wrapper {
-    gradleVersion = "${gradleVersion}"
-}
-
-dependencies {
-    //Kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
-
-    //Groovy
-    implementation("org.codehaus.groovy:groovy-all:${groovyVersion}")
-
-    //Scala
-    implementation("org.scala-lang:scala-library:${scalaVersion}")
-
-    // Codenarc
-    implementation("org.codenarc:CodeNarc:${codenarcPluginVersion}")
-
-    //Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-webflux:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-starter-validation:${springBootVersion}")
-    implementation("org.springframework.boot:spring-boot-configuration-processor:${springBootVersion}")
-    //Added on 2020-12-01
-    implementation("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
-
-    //Jackson
-    implementation("com.fasterxml.jackson.core:jackson-core:${jacksonVersion}")
-    implementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
-    implementation("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
-
-    //Camel
-    implementation("org.apache.camel.springboot:camel-spring-boot-starter:${apacheCamelVersion}")
-    implementation("org.apache.camel:camel-core:${apacheCamelVersion}")
-
-    //postgreSQL database
-    runtimeOnly("org.postgresql:postgresql:${postgresqlVersion}")
-
-    // Oracle database
-    runtimeOnly fileTree(dir: 'libs', include: 'ojdbc8.jar')
-    //runtimeOnly("com.oracle.jdbc:ojdbc8:${oracleVersion}")
-    implementation("org.apache.tomcat:tomcat-jdbc:${tomcatJdbcVersion}")
-
-    //Flyway
-    implementation("org.flywaydb:flyway-core:${flywayVersion}")
-
-    //excel
-    implementation("org.apache.poi:poi:${poiVersion}")
-    implementation("org.apache.poi:poi-ooxml:${poiVersion}")
-
-    //influx
-    implementation("io.micrometer:micrometer-registry-influx:${micrometerInfluxVersion}")
-
-    //Validation
-    implementation("javax.validation:validation-api:${validationVersion}")
-    //implementation "org.hibernate:hibernate-validator-annotation-processor:${hibernateVersion}"
-
-    //logstash
-    runtimeOnly("net.logstash.logback:logstash-logback-encoder:${logstashLogbackVersion}")
-    //implementation("net.logstash.logback:logstash-logback-encoder:4.11")
-
-    //Used for transactional
-    // implementation("org.aspectj:aspectjweaver:1.9.6")
-
-
-    //graphics
-    implementation("net.coobird:thumbnailator:${thumbnailatorVersion}")
-
-    //hibernate
-    implementation("org.hibernate:hibernate-core:${hibernateVersion}")
-    implementation("org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJpaVersion}")
-
-    //Logging
-    implementation("ch.qos.logback:logback-classic:${logbackVersion}")
-    implementation("org.apache.logging.log4j:log4j-core:${apacheLoggingVersion}")
-
-}
-
-//tasks.withType(bootRun) {
-//    options.encoding = 'UTF-8'
-//}
 
 tasks.withType(CodeNarc) {
     configFile = rootProject.file 'config/codenarc/codenarcMain.groovy'
