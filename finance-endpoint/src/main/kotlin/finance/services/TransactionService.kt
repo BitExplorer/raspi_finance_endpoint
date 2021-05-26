@@ -260,8 +260,7 @@ open class TransactionService(
                     existingReceiptImage.thumbnail = thumbnail
                     existingReceiptImage.image = rawImage
                     existingReceiptImage.imageFormatType = imageFormatType
-                    val response = receiptImageService.insertReceiptImage(receiptImageOptional.get())
-                    return response
+                    return receiptImageService.insertReceiptImage(receiptImageOptional.get())
                 }
                 logger.error("Failed to update receipt image for transaction ${transaction.guid}")
                 meterService.incrementExceptionThrownCounter("RuntimeException")
@@ -466,7 +465,7 @@ open class TransactionService(
         calendar.add(Calendar.DAY_OF_MONTH, 30)
         val todayPlusThirty = Date(calendar.time.time)
         val accountNeedingAttention = mutableListOf<Account>()
-        val transactionStates: List<TransactionState> = ArrayList(listOf(TransactionState.Cleared))
+        val transactionStates: List<TransactionState> = listOf(TransactionState.Cleared)
         accountService.updateTheGrandTotalForAllClearedTransactions()
         val accountsToInvestigate =
             accountService.findByActiveStatusAndAccountTypeAndTotalsIsGreaterThanOrderByAccountNameOwner()

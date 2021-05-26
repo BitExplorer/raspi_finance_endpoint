@@ -10,6 +10,7 @@ plugins {
     id 'java-library'
     id 'jacoco'
     id 'codenarc'
+    // id "com.github.spotbugs" version "${spotBugsVersion}"
     id "org.springframework.boot" version "${springBootVersion}"
     id "org.jetbrains.kotlin.jvm" version "${kotlinVersion}"
     id "org.flywaydb.flyway" version "${flywayVersion}"
@@ -127,6 +128,8 @@ dependencies {
 
     //Used for transactional
     // implementation("org.aspectj:aspectjweaver:1.9.6")
+    //implementation("com.github.spotbugs:spotbugs:${spotBugsVersion}")
+
 
 
     //graphics
@@ -150,3 +153,20 @@ tasks.withType(CodeNarc) {
     configFile = rootProject.file 'config/codenarc/codenarcMain.groovy'
     ignoreFailures = true
 }
+
+
+// spotbugsMain {
+//     reports {
+//         html {
+//             enabled = true
+//         }
+//     }
+// }
+
+// spotbugsTest {
+//     reports {
+//         html {
+//             enabled = true
+//         }
+//     }
+// }

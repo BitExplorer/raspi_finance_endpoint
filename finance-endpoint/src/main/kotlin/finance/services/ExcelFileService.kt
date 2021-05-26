@@ -139,6 +139,7 @@ open class ExcelFileService(
                 ExcelFileColumn.Notes -> {
                     newCell.setCellValue(transaction.notes)
                 }
+                //TODO: add a default clause
             }
         }
     }
