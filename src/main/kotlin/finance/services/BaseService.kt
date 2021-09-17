@@ -12,23 +12,20 @@ import javax.validation.Validator
 @Service
 open class BaseService {
     @Autowired
-    lateinit var meterService: MeterService
-
-    @Autowired
     lateinit var validator: Validator
 
-    fun handleConstraintViolations(constraintViolations: Set<ConstraintViolation<*>>, meterService: MeterService) {
-        if (constraintViolations.isNotEmpty()) {
-            var details = ""
-            constraintViolations.forEach { constraintViolation ->
-                details = constraintViolation.invalidValue.toString() + ": " + constraintViolation.message
-                logger.error(details)
-            }
-            logger.error("Cannot insert record because of constraint violation(s): $details")
-            meterService.incrementExceptionThrownCounter("ValidationException")
-            throw ValidationException("Cannot insert record because of constraint violation(s): $details")
-        }
-    }
+//    fun handleConstraintViolations(constraintViolations: Set<ConstraintViolation<*>>, meterService: MeterService) {
+//        if (constraintViolations.isNotEmpty()) {
+//            var details = ""
+//            constraintViolations.forEach { constraintViolation ->
+//                details = constraintViolation.invalidValue.toString() + ": " + constraintViolation.message
+//                logger.error(details)
+//            }
+//            logger.error("Cannot insert record because of constraint violation(s): $details")
+//            //meterService.incrementExceptionThrownCounter("ValidationException")
+//            throw ValidationException("Cannot insert record because of constraint violation(s): $details")
+//        }
+//    }
 
     companion object {
         val mapper = ObjectMapper()

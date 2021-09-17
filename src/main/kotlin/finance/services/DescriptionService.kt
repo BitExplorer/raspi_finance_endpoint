@@ -16,7 +16,7 @@ open class DescriptionService(
     @Timed
     override fun insertDescription(description: Description): Description {
         val constraintViolations: Set<ConstraintViolation<Description>> = validator.validate(description)
-        handleConstraintViolations(constraintViolations, meterService)
+        //handleConstraintViolations(constraintViolations, meterService)
         description.dateAdded = Timestamp(Calendar.getInstance().time.time)
         description.dateUpdated = Timestamp(Calendar.getInstance().time.time)
         return descriptionRepository.saveAndFlush(description)
