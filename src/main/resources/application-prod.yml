@@ -34,8 +34,8 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-    hikari:
-      schema: public
+#    hikari:
+#      schema: public
   sql:
     init:
       continue-on-error: false
@@ -49,7 +49,8 @@ spring:
     open-in-view: false
     generate-ddl: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
+    database: h2
   #    properties:
   #      hibernate:
   #        jdbc:
@@ -74,6 +75,9 @@ spring:
 # ===============================
 logging:
   config: classpath:logback-prod.groovy
+
+
+
 
 debug: false
 
