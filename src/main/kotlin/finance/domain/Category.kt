@@ -6,11 +6,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.ObjectMapper
 import finance.utils.Constants.ALPHA_NUMERIC_NO_SPACE_PATTERN
 import finance.utils.Constants.FIELD_MUST_BE_NUMERIC_NO_SPACE_MESSAGE
-import finance.utils.LowerCaseConverter
+//import finance.utils.LowerCaseConverter
 import org.hibernate.annotations.Proxy
 import java.sql.Timestamp
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 import javax.validation.constraints.Min
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
@@ -35,7 +35,7 @@ data class Category(
 
     @field:Size(min = 1, max = 50)
     @field:Pattern(regexp = ALPHA_NUMERIC_NO_SPACE_PATTERN, message = FIELD_MUST_BE_NUMERIC_NO_SPACE_MESSAGE)
-    @field:Convert(converter = LowerCaseConverter::class)
+    //@field:Convert(converter = LowerCaseConverter::class)
     @Column(name = "category_name", unique = true, nullable = false)
     @JsonProperty
     var categoryName: String

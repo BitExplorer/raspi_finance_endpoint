@@ -9,17 +9,21 @@ import finance.utils.Constants.ALPHA_UNDERSCORE_PATTERN
 import finance.utils.Constants.FIELD_MUST_BE_FOUR_DIGITS_MESSAGE
 import finance.utils.Constants.FIELD_MUST_BE_ALPHA_SEPARATED_BY_UNDERSCORE_MESSAGE
 import finance.utils.Constants.FIELD_MUST_BE_A_CURRENCY_MESSAGE
-import finance.utils.LowerCaseConverter
+//import finance.utils.LowerCaseConverter
+import jakarta.persistence.Entity
+import jakarta.persistence.Table
+import jakarta.persistence.UniqueConstraint
 import org.hibernate.annotations.Proxy
 import java.math.BigDecimal
 import java.sql.Timestamp
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 import javax.validation.constraints.Digits
 import javax.validation.constraints.Min
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
 
+//@Entity
 @Entity
 @Proxy(lazy = false)
 @Table(
@@ -42,7 +46,7 @@ data class Account(
     @JsonProperty
     @Column(name = "account_name_owner", unique = true, nullable = false)
     @field:Size(min = 3, max = 40)
-    @field:Convert(converter = LowerCaseConverter::class)
+    //@field:Convert(converter = LowerCaseConverter::class)
     @field:Pattern(regexp = ALPHA_UNDERSCORE_PATTERN, message = FIELD_MUST_BE_ALPHA_SEPARATED_BY_UNDERSCORE_MESSAGE)
     var accountNameOwner: String,
 

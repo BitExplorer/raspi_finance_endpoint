@@ -12,7 +12,7 @@ import org.hibernate.annotations.Proxy
 //import org.hibernate.annotations.Type
 import java.sql.Timestamp
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 import javax.validation.constraints.Min
 
 @Entity

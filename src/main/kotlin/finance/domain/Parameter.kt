@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.ObjectMapper
-import finance.utils.LowerCaseConverter
+//import finance.utils.LowerCaseConverter
 import org.hibernate.annotations.Proxy
 import java.sql.Timestamp
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 import javax.validation.constraints.Min
 import javax.validation.constraints.Size
 
@@ -26,13 +26,13 @@ data class Parameter(
     var parameterId: Long,
 
     @field:Size(min = 1, max = 50)
-    @field:Convert(converter = LowerCaseConverter::class)
+    //@field:Convert(converter = LowerCaseConverter::class)
     @Column(name = "parameter_name", unique = true, nullable = false)
     @JsonProperty
     var parameterName: String,
 
     @field:Size(min = 1, max = 50)
-    @field:Convert(converter = LowerCaseConverter::class)
+    //@field:Convert(converter = LowerCaseConverter::class)
     @Column(name = "parameter_value", unique = true, nullable = false)
     @JsonProperty
     var parameterValue: String,

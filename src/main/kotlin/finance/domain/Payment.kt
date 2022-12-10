@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import finance.utils.Constants
 import finance.utils.Constants.FIELD_MUST_BE_UUID_MESSAGE
 import finance.utils.Constants.UUID_PATTERN
-import finance.utils.LowerCaseConverter
+//import finance.utils.LowerCaseConverter
 import finance.utils.ValidDate
 import org.hibernate.annotations.Proxy
 import java.math.BigDecimal
@@ -13,7 +13,7 @@ import java.sql.Date
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.persistence.*
+import jakarta.persistence.*
 import javax.validation.constraints.Digits
 import javax.validation.constraints.Min
 import javax.validation.constraints.Pattern
@@ -37,7 +37,7 @@ data class Payment(
 
     @JsonProperty
     @Column(name = "account_name_owner", nullable = false)
-    @field:Convert(converter = LowerCaseConverter::class)
+    //@field:Convert(converter = LowerCaseConverter::class)
     @field:Size(min = 3, max = 40)
     @field:Pattern(regexp = Constants.ALPHA_UNDERSCORE_PATTERN, message = Constants.FIELD_MUST_BE_ALPHA_SEPARATED_BY_UNDERSCORE_MESSAGE)
     var accountNameOwner: String,
